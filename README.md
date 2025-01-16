@@ -33,6 +33,48 @@ Update the finger_sounds dictionary in the script to match your file paths.
 ### 4. Run the Program
 Use the following command to start the Virtual Piano:
 
+## 🛠️ Technologies Used
+
+- **Language/Framework**: Python
+- **Libraries**: 
+  - Pygame (for audio playback)
+  - Mediapipe (for hand tracking)
+  - OpenCV (for computer vision and webcam feed)
+- **Tools**:
+  - Visual Studio Code (for development)
+  - Git (for version control)
+ 
+## 🌟 Future Enhancements
+
+- Add multiple levels of increasing difficulty.
+- Implement power-ups and bonuses.
+- Add a leaderboard for players to compete globally.
+- Include sound effects for different hand gestures.
+- Optimize hand detection for faster response time.
+
+---
+
+## 🧑‍💻 Contributing
+
+Contributions are welcome! Feel free to:
+
+1. Fork the repository.
+2. Make your changes.
+3. Submit a pull request.
+
+---
+
+## 🖍️ License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## 📩 Contact
+
+For questions or feedback, reach out via:  
+**Email**: batrapulkit1103@gmail.com
+
 ```bash
 python virtual_piano.py
 
