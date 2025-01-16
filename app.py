@@ -6,27 +6,27 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 
+# Initialize PyGame for sound
+pygame.mixer.init()
+
+# Mapping sounds to each finger (using .wav files in the 'wav' folder)
+finger_sounds = {
+    "thumb_left": pygame.mixer.Sound(r"./wav/A4.wav"),
+    "index_left": pygame.mixer.Sound(r"./wav/B4.wav"),
+    "middle_left": pygame.mixer.Sound(r"./wav/C4.wav"),
+    "ring_left": pygame.mixer.Sound(r"./wav/D4.wav"),
+    "pinky_left": pygame.mixer.Sound(r"./wav/E4.wav"),
+    "thumb_right": pygame.mixer.Sound(r"./wav/F4.wav"),
+    "index_right": pygame.mixer.Sound(r"./wav/G4.wav"),
+    "middle_right": pygame.mixer.Sound(r"./wav/D5.wav"),
+    "ring_right": pygame.mixer.Sound(r"./wav/E5.wav"),
+    "pinky_right": pygame.mixer.Sound(r"./wav/C5.wav"),
+}
+
 # Initialize Mediapipe
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
 mp_draw = mp.solutions.drawing_utils
-
-# Initialize PyGame for sound
-pygame.init()
-
-# Mapping sounds to each finger (using .wav files from E:\piano\wav)
-finger_sounds = {
-    "thumb_left": pygame.mixer.Sound(r"E:\piano\wav\A4.wav"),
-    "index_left": pygame.mixer.Sound(r"E:\piano\wav\B4.wav"),
-    "middle_left": pygame.mixer.Sound(r"E:\piano\wav\C4.wav"),
-    "ring_left": pygame.mixer.Sound(r"E:\piano\wav\D4.wav"),
-    "pinky_left": pygame.mixer.Sound(r"E:\piano\wav\E4.wav"),
-    "thumb_right": pygame.mixer.Sound(r"E:\piano\wav\F4.wav"),
-    "index_right": pygame.mixer.Sound(r"E:\piano\wav\G4.wav"),
-    "middle_right": pygame.mixer.Sound(r"E:\piano\wav\D5.wav"),
-    "ring_right": pygame.mixer.Sound(r"E:\piano\wav\E5.wav"),
-    "pinky_right": pygame.mixer.Sound(r"E:\piano\wav\C5.wav"),
-}
 
 # To track which fingers have already played their sounds
 played_fingers = set()
