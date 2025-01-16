@@ -38,10 +38,14 @@ st.title("Virtual Piano Hand Tracker")
 camera_input = st.camera_input("Capture your hand gestures")
 
 if camera_input is not None:
-    # Convert the camera input (image) into an OpenCV format (numpy array)
-    img_array = np.array(camera_input)
-    # Convert the image to RGB (OpenCV uses BGR by default)
-    rgb_image = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
+    # Convert the camera input (image) into a PIL format (which is compatible with Mediapipe)
+    image = Image.open(camera_input)
+
+    # Convert PIL image to numpy array (required by MediaPipe)
+    img_array = np.array(image)
+
+    # Convert to RGB (required by MediaPipe, since PIL opens in RGBA by default)
+    rgb_image = cv2.cvtColor(img_array, cv2.COLOR_RGBA2RGB)
 
     # Process the image using MediaPipe for hand landmarks
     results = hands.process(rgb_image)
@@ -106,4 +110,3 @@ if camera_input is not None:
 
     # Display the image in Streamlit
     st.image(img_pil, channels="RGB", use_column_width=True)
-
