@@ -1,26 +1,26 @@
 import cv2
 import mediapipe as mp
-import pygame
 import threading
 import streamlit as st
 import numpy as np
 from PIL import Image
 
-# Initialize PyGame for sound
-pygame.mixer.init()
+# Mock sound playing for cloud deployment (just prints the sound file)
+def play_sound(sound):
+    print("Sound played:", sound)
 
 # Mapping sounds to each finger (using .wav files in the 'wav' folder)
 finger_sounds = {
-    "thumb_left": pygame.mixer.Sound(r"./wav/A4.wav"),
-    "index_left": pygame.mixer.Sound(r"./wav/B4.wav"),
-    "middle_left": pygame.mixer.Sound(r"./wav/C4.wav"),
-    "ring_left": pygame.mixer.Sound(r"./wav/D4.wav"),
-    "pinky_left": pygame.mixer.Sound(r"./wav/E4.wav"),
-    "thumb_right": pygame.mixer.Sound(r"./wav/F4.wav"),
-    "index_right": pygame.mixer.Sound(r"./wav/G4.wav"),
-    "middle_right": pygame.mixer.Sound(r"./wav/D5.wav"),
-    "ring_right": pygame.mixer.Sound(r"./wav/E5.wav"),
-    "pinky_right": pygame.mixer.Sound(r"./wav/C5.wav"),
+    "thumb_left": "./wav/A4.wav",
+    "index_left": "./wav/B4.wav",
+    "middle_left": "./wav/C4.wav",
+    "ring_left": "./wav/D4.wav",
+    "pinky_left": "./wav/E4.wav",
+    "thumb_right": "./wav/F4.wav",
+    "index_right": "./wav/G4.wav",
+    "middle_right": "./wav/D5.wav",
+    "ring_right": "./wav/E5.wav",
+    "pinky_right": "./wav/C5.wav",
 }
 
 # Initialize Mediapipe
@@ -30,10 +30,6 @@ mp_draw = mp.solutions.drawing_utils
 
 # To track which fingers have already played their sounds
 played_fingers = set()
-
-# Function to play sound asynchronously
-def play_sound(sound):
-    sound.play()
 
 # Streamlit app title
 st.title("Virtual Piano Hand Tracker")
@@ -116,4 +112,3 @@ while True:
 
 # Release the webcam when the app is closed
 cap.release()
-pygame.quit()
