@@ -2,6 +2,9 @@
 
 This project is a **Virtual Piano** that allows users to play piano notes using hand gestures detected via a webcam. It leverages **Mediapipe** for hand tracking and **PyGame** for audio playback. The system detects which fingers are raised and plays corresponding piano sounds.
 
+
+(https://raw.githubusercontent.com/batrapulkit/Virtual-Piano/main/assets/thumbnail.jpg)](https://github.com/batrapulkit/Virtual-Piano/blob/main/demo.mp4)
+
 ---
 
 ## 📖 Features
