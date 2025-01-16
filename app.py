@@ -1,9 +1,9 @@
-import cv2
 import mediapipe as mp
 import threading
 import streamlit as st
 import numpy as np
 from PIL import Image
+import io
 
 # Mock sound playing for cloud deployment (just prints the sound file)
 def play_sound(sound):
@@ -34,26 +34,22 @@ played_fingers = set()
 # Streamlit app title
 st.title("Virtual Piano Hand Tracker")
 
-# Start the webcam feed using OpenCV
-cap = cv2.VideoCapture(0)
+# Use Streamlit's built-in camera input
+camera_input = st.camera_input("Capture your hand gestures")
 
-# Define a placeholder for the webcam feed
-frame_placeholder = st.empty()
+if camera_input is not None:
+    # Convert the camera input (image) into an OpenCV format (numpy array)
+    img_array = np.array(camera_input)
+    # Convert the image to RGB (OpenCV uses BGR by default)
+    rgb_image = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
 
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
+    # Process the image using MediaPipe for hand landmarks
+    results = hands.process(rgb_image)
 
-    # Flip the frame horizontally
-    frame = cv2.flip(frame, 1)
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    results = hands.process(rgb_frame)
-
-    # Process hand landmarks
+    # If hand landmarks are found, process them
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
-            mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+            mp_draw.draw_landmarks(rgb_image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
             # Get fingertip and MCP (knuckle) coordinates for each finger
             landmarks = hand_landmarks.landmark
@@ -105,10 +101,9 @@ while True:
             elif pinky_tip >= pinky_mcp:
                 played_fingers.discard(f"pinky_{hand_prefix}")
 
-    # Convert the frame to an image compatible with Streamlit and update the placeholder
-    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    img_pil = Image.fromarray(frame_rgb)
-    frame_placeholder.image(img_pil, channels="RGB", use_column_width=True)
+    # Convert processed image back to PIL format for Streamlit display
+    img_pil = Image.fromarray(rgb_image)
 
-# Release the webcam when the app is closed
-cap.release()
+    # Display the image in Streamlit
+    st.image(img_pil, channels="RGB", use_column_width=True)
+
