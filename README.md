@@ -33,6 +33,9 @@ Update the finger_sounds dictionary in the script to match your file paths.
 ### 4. Run the Program
 Use the following command to start the Virtual Piano:
 
+```bash
+python virtual_piano.py
+
 ## 🛠️ Technologies Used
 
 - **Language/Framework**: Python
@@ -75,7 +78,6 @@ This project is licensed under the **MIT License**.
 For questions or feedback, reach out via:  
 **Email**: batrapulkit1103@gmail.com
 
-```bash
-python virtual_piano.py
+
 
 
